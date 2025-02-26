@@ -23,7 +23,6 @@ class PenjualanSeeder extends Seeder
                 'penjualan_tanggal' => Carbon::now()->subDays(rand(1, 30)),
             ];
         }
-
         DB::table('t_penjualan')->insert($data);
     }
 }

@@ -24,7 +24,6 @@ class StokSeeder extends Seeder
                 'stok_tanggal' => Carbon::now(),
             ];
         }
-
         DB::table('t_stok')->insert($data);
     }
 }
