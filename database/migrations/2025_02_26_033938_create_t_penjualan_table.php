@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('pembeli', 50);
             $table->dateTime('penjualan_tanggal');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('user_id')->on('m_user')->onDelete('cascade');
         });
     }
 
