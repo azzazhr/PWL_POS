@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('t_penjualan', function (Blueprint $table) {
             $table->id('penjualan_id');
+            $table->unsignedBigInteger('user_id')->index();
             $table->string('pembeli', 50);
             $table->dateTime('penjualan_tanggal');
             $table->timestamps();
