@@ -14,15 +14,26 @@ return new class extends Migration
         Schema::create('m_barang', function (Blueprint $table) {
             $table->id('barang_id');
             $table->unsignedBigInteger('kategori_id')->index();
+            $table->unsignedBigInteger('supplier_id')->index(); 
             $table->string('barang_nama', 100);
             $table->integer('harga_beli');
             $table->integer('harga_jual');
             $table->timestamps();
 
             // Foreign key ke m_kategori
-            $table->foreign('kategori_id')->references('kategori_id')->on('m_kategori')->onDelete('cascade');
+            $table->foreign('kategori_id')
+                ->references('kategori_id')
+                ->on('m_kategori')
+                ->onDelete('cascade');
+
+            // Foreign key ke m_supplier (Perbaikan)
+            $table->foreign('supplier_id')
+                ->references('supplier_id')
+                ->on('m_supplier')
+                ->onDelete('cascade');
         });
     }
+
 
     /**
      * Reverse the migrations.
