@@ -18,6 +18,7 @@ class PenjualanSeeder extends Seeder
 
         for ($i = 1; $i <= 10; $i++) {
             $data[] = [
+                'user_id' => rand(1, 3),
                 'pembeli' => 'Pembeli ' . $i,
                 'penjualan_tanggal' => Carbon::now()->subDays(rand(1, 30)),
             ];
