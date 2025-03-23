@@ -52,6 +52,13 @@
                         class="nav-icon fas fa-cash-register"></i>
                     <p>Transaksi Penjualan</p>
                 </a> </li>
+            <!-- Tambahkan Menu Logout -->
+            <li class="nav-header">Logout</li>
+                <a href="#" class="nav-link text-danger" data-toggle="modal" data-target="#logoutModal">
+                    <i class="nav-icon fas fa-sign-out-alt"></i>
+                    <p>Logout</p>
+                </a>
+            </li>
         </ul>
     </nav>
 </div>
