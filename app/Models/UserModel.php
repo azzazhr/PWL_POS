@@ -10,13 +10,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable; // implementasi class Au
 class UserModel extends Authenticatable
 {
     use HasFactory;
-
-    //protected $table = 'm_user';
-    //protected $primaryKey = 'user_id';
-    //protected $fillable = ['level_id', 'username', 'nama', 'password'];
     protected $table = 'm_user';
     protected $primaryKey = 'user_id';
-    protected $fillable = ['username', 'password', 'nama', 'level_id', 'created_at', 'updated_at'];
+    protected $fillable = ['level_id', 'username', 'nama', 'password'];
 
     protected $hidden = ['password']; // jangan ditampilkan saat select
 
