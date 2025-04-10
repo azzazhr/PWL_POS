@@ -132,6 +132,7 @@ Route::middleware(['auth'])->group(function() { // artinya semua route di dalam 
         Route::delete('/barang/{id}', [BarangController::class, 'destroy']);
         Route::get('/barang/import', [BarangController::class, 'import']);
         Route::post('/barang/import_ajax', [BarangController::class, 'import_ajax']);
+        Route::get('/barang/export_excel', [BarangController::class, 'export_excel']);
     });
 });
 
