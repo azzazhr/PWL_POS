@@ -72,6 +72,7 @@ Route::middleware(['auth'])->group(function() { // artinya semua route di dalam 
         Route::delete('/level/{id}', [LevelController::class, 'destroy']);
         Route::get('/level/import', [LevelController::class, 'import']);
         Route::post('/level/import_ajax', [LevelController::class, 'import_ajax']);
+        Route::get('/level/export_excel', [LevelController::class, 'export_excel']);
     });
 
     Route::middleware(['authorize:ADM,MNG'])->group(function () {
