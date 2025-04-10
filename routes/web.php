@@ -115,6 +115,7 @@ Route::middleware(['auth'])->group(function() { // artinya semua route di dalam 
         Route::delete('/supplier/{id}', [SupplierController::class, 'destroy']);
         Route::get('/supplier/import', [SupplierController::class, 'import']);
         Route::post('/supplier/import_ajax', [SupplierController::class, 'import_ajax']);
+        Route::get('/supplier/export_excel', [SupplierController::class, 'export_excel']);
     });
 
     Route::middleware(['authorize:ADM,MNG,STF'])->group(function () {
