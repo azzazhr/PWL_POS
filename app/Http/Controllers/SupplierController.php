@@ -6,6 +6,7 @@ use App\Models\SupplierModel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class SupplierController extends Controller
 {
@@ -68,8 +69,8 @@ class SupplierController extends Controller
             'title' => 'Tambah supplier baru'
         ];
 
-        $supplier = SupplierModel::all(); 
-        $activeMenu = 'supplier'; 
+        $supplier = SupplierModel::all();
+        $activeMenu = 'supplier';
 
         return view('supplier.create', [
             'breadcrumb' => $breadcrumb,
@@ -96,7 +97,7 @@ class SupplierController extends Controller
 
         return redirect('/supplier')->with('success', 'Data supplier berhasil disimpan');
     }
-   
+
     public function show(string $id)
     {
         $supplier = SupplierModel::find($id);
@@ -133,7 +134,7 @@ class SupplierController extends Controller
             'title' => 'Edit supplier'
         ];
 
-        $activeMenu = 'supplier'; 
+        $activeMenu = 'supplier';
 
         return view('supplier.edit', [
             'breadcrumb' => $breadcrumb,
@@ -168,7 +169,7 @@ class SupplierController extends Controller
         }
 
         try {
-            SupplierModel::destroy($id); 
+            SupplierModel::destroy($id);
             return redirect('/supplier')->with('success', 'Data supplier berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect('/supplier')->with(
@@ -308,5 +309,62 @@ class SupplierController extends Controller
         return redirect('/');
     }
 
+    public function import()
+    {
+        return view('supplier.import');
+    }
 
+    public function import_ajax(Request $request)
+    {
+        if ($request->ajax() || $request->wantsJson()) {
+            $rules = [
+                'file_supplier' => ['required', 'mimes:xlsx', 'max:1024']
+            ];
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Validasi Gagal',
+                    'msgField' => $validator->errors()
+                ]);
+            }
+
+            $file = $request->file('file_supplier');
+            $reader = IOFactory::createReader('Xlsx');
+            $reader->setReadDataOnly(true);
+            $spreadsheet = $reader->load($file->getRealPath());
+            $sheet = $spreadsheet->getActiveSheet();
+            $data = $sheet->toArray(null, false, true, true);
+
+            $insert = [];
+            if (count($data) > 1) {
+                foreach ($data as $baris => $value) {
+                    if ($baris > 1) {
+                        $insert[] = [
+                            'supplier_id' => $value['A'],
+                            'supplier_kode' => $value['B'],
+                            'supplier_nama' => $value['C'],
+                            'supplier_alamat' => $value['D'],
+                            'created_at' => now(),
+                        ];
+                    }
+                }
+
+                if (count($insert) > 0) {
+                    SupplierModel::insertOrIgnore($insert);
+                }
+
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Data supplier berhasil diimport'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Tidak ada data yang diimport'
+                ]);
+            }
+        }
+        return redirect('/');
+    }
 }
