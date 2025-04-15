@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
@@ -143,5 +144,13 @@ Route::middleware(['auth'])->group(function() { // artinya semua route di dalam 
         Route::get('/barang/export_excel', [BarangController::class, 'export_excel']);
         Route::get('/barang/export_pdf', [BarangController::class, 'export_pdf']);
     });
+
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
+        Route::post('/update', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/delete', [ProfileController::class, 'delete'])->name('profile.delete');
+    });
+
+
 });
 
