@@ -10,7 +10,7 @@
                 </button>
                 <a href="{{ url('/kategori/export_excel') }}" class="btn btn-sm btn-primary mt-1"><i class="fa fa-file-excel"></i>
                     Export Data Kategori</a>
-                <a href="{{ url('/kategori/export_pdf') }}" class="btn btn-sm btn-primary mt-1"><i class="fa fa-file-pdf"></i>
+                <a href="{{ url('/kategori/export_pdf') }}" class="btn btn-sm btn-warning mt-1"><i class="fa fa-file-pdf"></i>
                     Export Data Kategori</a>
                 <button onclick="modalAction('{{ url('/kategori/create_ajax') }}')" class="btn btn-sm btn-success mt-1">
                     Tambah Ajax

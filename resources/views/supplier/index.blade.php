@@ -10,7 +10,7 @@
                 </button>
                 <a href="{{ url('/supplier/export_excel') }}" class="btn btn-sm btn-primary mt-1"><i class="fa fa-file-excel"></i>
                     Export Data Supplier</a>
-                <a href="{{ url('/supplier/export_pdf') }}" class="btn btn-sm btn-primary mt-1"><i class="fa fa-file-pdf"></i>
+                <a href="{{ url('/supplier/export_pdf') }}" class="btn btn-sm btn-warning mt-1"><i class="fa fa-file-pdf"></i>
                     Export Data Supplier</a>
                 <button onclick="modalAction('{{ url('/supplier/create_ajax') }}')" class="btn btn-sm btn-success mt-1">
                     Tambah Ajax
