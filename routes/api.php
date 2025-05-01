@@ -48,3 +48,10 @@ Route::post('barang', [BarangController::class, 'store']);
 Route::get('barang/{barang}', [BarangController::class, 'show']);
 Route::put('barang/{barang}', [BarangController::class, 'update']);
 Route::delete('barang/{barang}', [BarangController::class, 'destroy']);
+
+use App\Http\Controllers\Api\SupplierController;
+Route::get('supplier', [SupplierController::class, 'index']);
+Route::post('supplier', [SupplierController::class, 'store']);
+Route::get('supplier/{supplier}', [SupplierController::class, 'show']);
+Route::put('supplier/{supplier}', [SupplierController::class, 'update']);
+Route::delete('supplier/{supplier}', [SupplierController::class, 'destroy']);
